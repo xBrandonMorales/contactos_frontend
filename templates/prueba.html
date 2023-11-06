@@ -9,11 +9,11 @@
     <h1>Prueba DOM</h1>
     <label for="nombre">Nombre</label>
     <input type="text" id="nombre">
-    <button value="Saludo" onclick="mensaje">Saludo</button>
+    <button value="Saludo" onclick="mensaje(document.getElementById('nombre').value)">Saludo</button>
 
     <script type="text/javascript">
-        function mensaje(){
-            alert("Hola");
+        function mensaje(nombre){
+            alert("Hola "+ nombre);
         }
     </script>
 </body>
