@@ -11,7 +11,3 @@ def index():
 @app.route("/buscar")
 def buscar():
     return render_template('buscar.html')
-
-@app.route("/prueba",methods=["GET","POST"])
-def prueba():
-    return render_template('prueba.html')
