@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const telefono = document.getElementById("telefono").value;
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/contactos", {
+            const response = await fetch("https://8000-gustavodelr-apicontacto-ped2bjym73u.ws-us106.gitpod.io/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 function getAll() {
     var request = new XMLHttpRequest();
-    request.open('GET', "http://127.0.0.1:8000/contactos");
+    request.open('GET', "https://8000-gustavodelr-apicontacto-ped2bjym73u.ws-us106.gitpod.io/");
     request.send();
 
     request.onload = (e) => {
