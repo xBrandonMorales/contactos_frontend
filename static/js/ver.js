@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Puedes utilizar una ruta en tu backend (FastAPI o Flask) para manejar esta solicitud
 
     // Ejemplo de solicitud con Fetch API
-    fetch(`https://api-contactos-backend1-785dfc9292d6.herokuapp.com//contactos/${encodeURIComponent(email)}`)
+    fetch(`https://api-contactos-backend1-785dfc9292d6.herokuapp.com/contactos/${encodeURIComponent(email)}`)
         .then(response => response.json())
         .then(data => {
             // Manipula los detalles del contacto y actualiza el contenido en la página
