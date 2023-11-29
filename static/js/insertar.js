@@ -1,74 +1,41 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Obtén el parámetro del correo electrónico de la URL
-    const params = new URLSearchParams(window.location.search);
-    const email = params.get("email");
+document.addEventListener("DOMContentLoaded", () => {
+    const insertForm = document.getElementById("insertForm");
+    const insertResultDiv = document.getElementById("insertResult");
 
-    // Obtén el formulario y los campos
-    const editContactForm = document.getElementById("edit-contact-form");
-    const emailInput = document.getElementById("email");
-    const nombreInput = document.getElementById("nombre");
-    const telefonoInput = document.getElementById("telefono");
+    insertForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    // Realiza una solicitud para obtener detalles del contacto con el correo electrónico proporcionado
-    fetch(`https://api-contactos-backend1-785dfc9292d6.herokuapp.com/contactos/${encodeURIComponent(email)}`)
-        .then(response => response.json())
-        .then(data => {
-            // Llena los campos del formulario con los detalles del contacto
-            emailInput.value = data.email;
-            nombreInput.value = data.nombre;
-            telefonoInput.value = data.telefono;
-        })
-        .catch(error => console.error("Error al obtener detalles del contacto:", error));
-});
+        const email = document.getElementById("email").value;
+        const nombre = document.getElementById("nombre").value;
+        const telefono = document.getElementById("telefono").value;
 
-function actualizar() {
-    // Obtén los nuevos valores de los campos
-    const nuevoNombre = document.getElementById("nombre").value;
-    const nuevoTelefono = document.getElementById("telefono").value;
-
-    // Obtén el parámetro del correo electrónico de la URL
-    const params = new URLSearchParams(window.location.search);
-    const email = params.get("email");
-
-    // Realiza una solicitud PUT para actualizar el contacto en el backend
-    fetch(`https://api-contactos-backend1-785dfc9292d6.herokuapp.com/contactos/${encodeURIComponent(email)}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: email,
-            nombre: nuevoNombre,
-            telefono: nuevoTelefono,
-        }),
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(error => {
-                throw new Error(`Error al actualizar el contacto. Código de estado: ${response.status}. Detalles: ${JSON.stringify(error)}`);
+        try {
+            const response = await fetch("https://8000-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io/contactos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, nombre, telefono }),
             });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                insertResultDiv.innerHTML = `<p>Contacto insertado: ${data.email}</p>`;
+                // Limpiar los campos del formulario después de la inserción
+                document.getElementById("email").value = "";
+                document.getElementById("nombre").value = "";
+                document.getElementById("telefono").value = "";
+
+                // Mostrar una alerta
+                alert("Contacto insertado exitosamente");
+
+                // Redirigir a la página principal
+                window.location.href = "/";
+            } else {
+                insertResultDiv.innerHTML = "<p>Error al insertar el contacto.</p>";
+            }
+        } catch (error) {
+            console.error(error);
         }
-        return response.json();
-    })
-    .then(data => {
-        // Muestra el mensaje de éxito en la página
-        const mensajeElemento = document.getElementById("mensaje");
-        mensajeElemento.innerHTML = `Contacto actualizado con éxito: ${data.email}, ${data.nombre}, ${data.telefono}`;
-
-        // Limpia el mensaje de error si estaba presente
-        const errorMensajeElemento = document.getElementById("error-mensaje");
-        errorMensajeElemento.innerHTML = "";
-
-        // Redirige a la página principal después de una edición exitosa
-        window.location.href = "/";
-    })
-    .catch(error => {
-        // Muestra el mensaje de error en la página
-        const errorMensajeElemento = document.getElementById("error-mensaje");
-        errorMensajeElemento.innerHTML = `Error al actualizar el contacto: ${error.message}`;
-
-        // Limpia el mensaje de éxito si estaba presente
-        const mensajeElemento = document.getElementById("mensaje");
-        mensajeElemento.innerHTML = "";
     });
-}
+});
