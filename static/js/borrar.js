@@ -35,7 +35,7 @@ function borrarContacto() {
     const email = params.get("email");
 
     // Realiza una solicitud DELETE para borrar el contacto en el backend
-    fetch(`https://8000-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io/contactos${encodeURIComponent(email)}`, {
+    fetch(`https://8080-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io/contactos${encodeURIComponent(email)}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

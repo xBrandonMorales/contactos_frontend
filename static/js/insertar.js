@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const telefono = document.getElementById("telefono").value;
 
         try {
-            const response = await fetch("https://8000-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io/contactos/
+            const response = await fetch("https://8080-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io/contactos", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
