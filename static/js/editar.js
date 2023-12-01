@@ -31,7 +31,7 @@ function actualizar() {
     const email = params.get("email");
 
     // Realiza una solicitud PUT para actualizar el contacto en el backend
-    fetch(`https://8000-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io/contactos${encodeURIComponent(email)}`, {
+    fetch(`https://8000-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io/contactos/${encodeURIComponent(email)}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
