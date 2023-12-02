@@ -5,7 +5,7 @@ function getAll() {
         console.error("Error al realizar la solicitud.");
     };
 
-    request.open('GET', "https://8080-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io", true);
+    request.open('GET', "https://8080-xbrandonmor-contactosba-865ied0q764.ws-us106.gitpod.io/", true);
     request.send();
 
     request.onload = (e) => {
